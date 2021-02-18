@@ -1,0 +1,188 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/yearly_trend.css">
+        
+    <link rel="stylesheet" type="text/css" href="css/nav.css" >
+     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="js/d3/pollutants.js"></script>
+</head>
+    <style>
+         .line {
+        fill: none;
+        /*stroke: #aaa;
+        stroke: #43484c;
+        stroke: #405275;
+        stroke: rgba(40, 53, 79, .95);
+        stroke: #161719;
+        stroke: #f99e1a;*/
+        stroke: #f89e35;
+        stroke-width: 2px;
+    }
+    
+    .line-text {
+        fill: #f89e35;
+        stroke: #f89e35;
+    }
+    
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        padding: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        background: #f99e1a;
+        border: 0px;
+        border-radius: 8px;
+    }
+    
+    .tooltip p {
+        margin: 0;
+        padding: 0;
+    }
+    
+    circle {
+        fill: rgba(40, 53, 79, .95);
+    }
+    
+        .btn{
+             background-color: lightskyblue; 
+        }
+    </style>
+<body>
+    <div id="myNav" class="overlay">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+   <div class="overlay-content">
+    <a href="yearly_trend.html">Air Pollution Trend</a>
+    <a href="pollutants.html">Pollutants</a>
+    <a href="yearly_shift.html">Shifting Through Years</a>
+    <a href="traffic_pollutant.html">Pollution and Traffic</a>
+      <a href="area.html">Pollution and Traffic - Area</a>
+  </div>
+
+</div>
+    <div class="bars" id="nav-action">
+  <span class="bar" onclick="openNav()"> </span>
+</div>
+    
+<section id="schedules" class="schedule section-padding" style="background-color: white">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title-header text-center" style="height:50%;">
+          <h1 class="wow fadeInUp" data-wow-delay="0.2s">Know your pollutants</h1>
+          <br> 
+          <h1 class="wow fadeInUp" data-wow-delay="0.2s">Click on the pollutant to show their information!
+          </h1>
+          <br><br>
+        
+          <a class="fadeInLeft wow btn btn-common btn-lg" data-wow-delay=".6s" onclick="ShowPollutants(1)"><h4 style="color:white ; margin:auto;">&nbsp PM10 &nbsp</h4></a>
+          <a  class="fadeInDown wow btn btn-common btn-lg" data-wow-delay=".6s" onclick="ShowPollutants(2)"> <h4 style="color:white ; margin:auto;">&nbsp CO &nbsp</h4></a>
+            <a  class="fadeInDown wow btn btn-common btn-lg" data-wow-delay=".6s" onclick="ShowPollutants(3)"> <h4 style="color:white ; margin:auto;">&nbsp NO &nbsp</h4></a>
+            <a  class="fadeInDown wow btn btn-common btn-lg" data-wow-delay=".6s" onclick="ShowPollutants(4)"> <h4 style="color:white ; margin:auto;">&nbsp SO2 &nbsp</h4></a>
+          <a  class="fadeInDown wow btn btn-common btn-lg" data-wow-delay=".6s" onclick="ShowPollutants(5)"> <h4 style="color:white ; margin:auto; "> NO2</h4></a>
+            <a  class="fadeInRight wow btn btn-common btn-lg" data-wow-delay=".6s" onclick="ShowPollutants(6)"> <h4 style="color:white ; margin:auto; "> Ozone</h4></a>
+          <br><br><br>
+
+            <h3 class="pol-info-head" style="visibility: hidden;font-size:1em;margin-top:0;"></h3>
+            <h3 class="pol-info" style="visibility: hidden;font-size:1em;margin-top:0;"></h3>
+
+            <br>
+            
+            <img class="pol-hide2" style="visibility:hidden; margin-top: 20px; height: 100px; width: 100px" src="image/scroll-down.gif" >
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+    
+  <section  class="schedule section-padding" style="background-color: #FAF7F7">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="section-title-header text-center">
+            <h1 class="section-title wow fadeInUp" data-wow-delay="0.2s">Pollutants</h1>
+            <br><br>
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <h5 class="chart-wrapper-info">
+                  Pollutants average difference with their standard value <br>(the bigger the better)
+                  <u class="chart-wrapper-year"></u>
+                </h5>
+               <div class="chart-wrapper" id="poll-bubble"></div>
+             </div>
+             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div class="chart-wrapper-header">
+                  <div class="chart-wrapper" id="poll-growth"></div>
+              </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+  </section>
+</body>
+    <script src="js/jquery-min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script>
+              new WOW().init();
+    </script>
+   
+    <script>
+        var question =false;
+    function ShowPollutants(val){
+        $('.pol-hide2').css({
+        'visibility': 'visible'
+      });
+        $('.pol-info-head').css({
+        'visibility': 'visible'
+      });
+        $('.pol-info').css({
+        'visibility': 'visible'
+      });
+        if(val==1){
+             $('.pol-info-head').html("PM10");
+            $('.pol-info').html("PM stands for particulate matter (also called particle pollution): the term for a mixture of solid particles and liquid droplets found in the air. Some particles, such as dust, dirt, soot, or smoke, are large or dark enough to be seen with the naked eye. Others are so small they can only be detected using an electron microscope.PM10 are inhalable particles, with diameters that are generally 10 micrometers and smaller");
+            
+        }else if(val==2){
+            $('.pol-info-head').html("CO");
+            $('.pol-info').html("CO is a colorless, odorless gas that can be harmful when inhaled in large amounts. CO is released when something is burned. The greatest sources of CO to outdoor air are cars, trucks and other vehicles or machinery that burn fossil fuels. A variety of items in your home such as unvented kerosene and gas space heaters, leaking chimneys and furnaces, and gas stoves also release CO and can affect air quality indoors.");
+        }else if(val==3){
+            $('.pol-info-head').html("NO");
+            $('.pol-info').html("Nitrogen oxide pollution is emitted from vehicle exhaust, and the burning of coal, oil, diesel fuel, and natural gas, especially from electric power plants. They are also emitted by cigarettes, gas stoves, kerosene heaters, wood burning, and silos that contain silage.Nitrogen oxides can create environmental health hazards when they react with sunlight and other chemicals to form smog. Nitrogen oxides and sulfur dioxide react with substances in the atmosphere to form acid rain.");
+        }else if(val==4){
+            $('.pol-info-head').html("SO2");
+            $('.pol-info').html("SO2 is the component of greatest concern and is used as the indicator for the larger group of gaseous sulfur oxides (SOx).  Other gaseous SOx (such as SO3) are found in the atmosphere at concentrations much lower than SO2.Emissions that lead to high concentrations of SO2 generally also lead to the formation of other SOx. The largest sources of SO2 emissions are from fossil fuel combustion at power plants andother industrial facilities.");
+        }else if(val==5){
+            $('.pol-info-head').html("NO2");
+            $('.pol-info').html("Nitrogen Dioxide (NO2) is one of a group of highly reactive gases known as oxides of nitrogen or nitrogen oxides (NOx).  Other nitrogen oxides include nitrous acid and nitric acid. NO2 is used as the indicator for the larger group of nitrogen oxides.NO2 primarily gets in the air from the burning of fuel. NO2 forms from emissions from cars, trucks and buses, power plants, and off-road equipment.");
+        }else if(val==6){
+            $('.pol-info-head').html("Ozone");
+            $('.pol-info').html("Ozone is a gas composed of three atoms of oxygen (O3). Ozone occurs both in the Earth's upper atmosphere and at ground level. Ozone can be good or bad, depending on where it is found.Ozone at ground level is a harmful air pollutant, because of its effects on people and the environment, and it is the main ingredient in 'smog.'");
+        }
+
+  };
+        
+        
+        
+function openNav() {
+  document.getElementById("myNav").style.width = "100%";
+}
+
+
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+    </script>
+</html>

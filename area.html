@@ -1,0 +1,107 @@
+<html>
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/yearly_trend.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="css/nav-area.css" >
+        <script src="js/index.js"></script>
+     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="js/d3/area.js"></script>
+</head>
+    <style>
+         .line {
+        fill: none;
+        /*stroke: #aaa;
+        stroke: #43484c;
+        stroke: #405275;
+        stroke: rgba(40, 53, 79, .95);
+        stroke: #161719;
+        stroke: #f99e1a;*/
+        stroke: #f89e35;
+        stroke-width: 2px;
+    }
+    
+    .line-text {
+        fill: #f89e35;
+        stroke: #f89e35;
+    }
+    
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        padding: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        background: #f99e1a;
+        border: 0px;
+        border-radius: 8px;
+    }
+    
+    .tooltip p {
+        margin: 0;
+        padding: 0;
+    }
+    
+    circle {
+        fill: rgba(40, 53, 79, .95);
+    }
+        
+        .bar { fill: steelblue; }
+    </style>
+<body>
+        <div id="myNav" class="overlay">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+   <div class="overlay-content">
+    <a href="yearly_trend.html">Air Pollution Trend</a>
+    <a href="pollutants.html">Pollutants</a>
+    <a href="yearly_shift.html">Shifting Through Years</a>
+    <a href="traffic_pollutant.html">Pollution and Traffic</a>
+      <a href="area.html">Pollution and Traffic - Area</a>
+  </div>
+
+</div>
+    <div class="bars1" id="nav-action">
+  <span class="bar1" onclick="openNav()"> </span>
+</div>
+    
+  <section  class="schedule section-padding" style="background-color: #FAF7F7">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="section-title-header text-center">
+            <h1 class="section-title wow fadeInUp" data-wow-delay="0.2s">Grouped by Area</h1>
+            <br><br>
+            <div class="row">
+              <div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
+               <div class="chart-wrapper" id="chart-line1"></div>
+             </div>
+             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div class="chart-wrapper-header">
+                <h5 class="chart-wrapper-info" style="margin-left:10%;">
+                  Left is the traffic percentage and below is the pollution rate
+                  <p style="padding-top:5%; font-size:1em !important;"> Hover to highlight the corresponding area</p>
+                </h5>
+                  <div class="chart-wrapper" id="chart-bar1"></div>
+              </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+  </section>
+</body>
+    <script src="js/jquery-min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script>
+              new WOW().init();
+    </script>
+</html>

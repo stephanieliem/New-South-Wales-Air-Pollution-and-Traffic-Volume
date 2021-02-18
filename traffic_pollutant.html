@@ -1,0 +1,116 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/yearly_shift.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="css/nav-black.css" >
+        <script src="js/index.js"></script>
+     <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="js/d3/traffic_pollutant.js"></script>
+</head>
+    <style>
+        div.tooltip {
+        position: absolute;
+        text-align: left;
+            font-family: monospace;
+        padding: 5px;
+        font-size: 12px;
+        background: #d0efff;
+        border: 0px;
+        border-radius: 8px;
+    }
+    
+    .tooltip p {
+        margin: 0;
+        padding: 0;
+    }
+        
+        h1{
+            color:white !important;
+        }
+    </style>
+<body>
+    
+    <div id="myNav" class="overlay">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <div class="overlay-content">
+    <a href="yearly_trend.html">Air Pollution Trend</a>
+    <a href="pollutants.html">Pollutants</a>
+    <a href="yearly_shift.html">Shifting Through Years</a>
+    <a href="traffic_pollutant.html">Pollution and Traffic</a>
+      <a href="area.html">Pollution and Traffic - Area</a>
+  </div>
+
+</div>
+    <div class="bars" id="nav-action">
+  <span class="bar" onclick="openNav()"> </span>
+</div>
+    
+  <section id="" class="section-padding" style="background-color: #4f4f4f">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="section-title-header text-center">
+            <h1 class="section-title wow fadeInUp" data-wow-delay="0.2s">Pollution and Traffic</h1>
+            <div id="content" class="text-center">
+            <div class="slider" style="display: block; text-align: center"></div>
+            
+            <h2 class="mapyear" style="color:white; padding-bottom: 3%;"></h2>
+            <h3 class="map-info" style="color:#D0D0D0"></h3>
+            <div id="map"></div>
+
+          </div>
+            <div class="row">
+              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <div id="map1"></div>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="general-info" style= "background-color: white;">
+                <div class="section" id="section-hidden" style=" visibility: hidden">
+                  <br>
+                  <h3 class="headerinfo" >General Information</h3>
+                  <table>
+                    <tr style="height: 50px; font-size: 1.2em;">
+                      <td style="text-align:left;">Name</td>
+                      <td>: </td>
+                      <td class="info-area" style="text-align: left;"></td>
+                    </tr>
+                    <tr style="height: 50px; font-size: 1.2em;">
+                      <td style="text-align: left">Zipcode</td>
+                      <td>: </td>
+                      <td class="info-zipcode" style="text-align: left"></td>
+                    </tr>
+                    <tr style="height: 50px; font-size: 1.2em;">
+                      <td style="text-align: left">Ratio</td>
+                      <td>: </td>
+                      <td class="info-rev-plus" style="text-align: left;"></td>
+                    </tr>
+                  </table>
+                </div>
+                  <h5 id="general-info-title">It might take a while for map to load</h5>
+                  <br>
+                  <br>
+                <h3 id="general-info-title1">Click Map!</h3>
+                <hr>
+              </div>
+            </div>
+          </div>
+          <div id="section-hidden2" style="visibility: hidden; color:white;">
+           Click again on the same suburb to zoom out maps 
+        </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+   
+</body>
+     
+    <script src="js/jquery-min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script>
+              new WOW().init();
+    </script>
+</html>
